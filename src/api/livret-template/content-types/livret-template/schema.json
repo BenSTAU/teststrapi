@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "livret_templates",
+  "info": {
+    "singularName": "livret-template",
+    "pluralName": "livret-templates",
+    "displayName": "LivretTemplate"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "promotion": {
+      "type": "string"
+    },
+    "year": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "sections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::section.section",
+      "mappedBy": "livret_template"
+    }
+  }
+}

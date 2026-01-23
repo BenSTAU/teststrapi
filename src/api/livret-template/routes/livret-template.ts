@@ -1,0 +1,7 @@
+/**
+ * livret-template router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::livret-template.livret-template');
