@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "formations",
+  "info": {
+    "singularName": "formation",
+    "pluralName": "formations",
+    "displayName": "Formation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "code": {
+      "type": "uid",
+      "targetField": "nom"
+    },
+    "intitule_complet": {
+      "type": "string",
+      "required": true
+    },
+    "niveau": {
+      "type": "string"
+    },
+    "rncp": {
+      "type": "string"
+    },
+    "annee": {
+      "type": "string"
+    },
+    "objectifs_pedagogiques": {
+      "type": "blocks"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "equipe_pedagogique": {
+      "type": "component",
+      "component": "equipe.equipe-pedagogique",
+      "repeatable": true
+    },
+    "bloc_competences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bloc-competence.bloc-competence"
+    }
+  }
+}

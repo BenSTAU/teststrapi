@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_suivi_notes_liaisons",
+  "info": {
+    "displayName": "notes_liaison"
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "datetime"
+    },
+    "auteur": {
+      "type": "string"
+    },
+    "observation": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

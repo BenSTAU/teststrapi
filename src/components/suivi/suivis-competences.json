@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_suivi_suivis_competences",
+  "info": {
+    "displayName": "suivis_competences"
+  },
+  "options": {},
+  "attributes": {
+    "bloc_titre": {
+      "type": "string"
+    },
+    "activites_realisees": {
+      "type": "blocks"
+    },
+    "niveau_atteint": {
+      "type": "enumeration",
+      "enum": [
+        "débutant",
+        "en_progression",
+        "autonome"
+      ]
+    },
+    "commentaire_tuteur": {
+      "type": "text"
+    },
+    "commentaire_apprenti": {
+      "type": "text"
+    },
+    "commentaire_formateur": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

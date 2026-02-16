@@ -1,0 +1,114 @@
+{
+  "kind": "collectionType",
+  "collectionName": "livrets",
+  "info": {
+    "singularName": "livret",
+    "pluralName": "livrets",
+    "displayName": "Livret"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "required": true
+    },
+    "formation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::formation.formation"
+    },
+    "statut": {
+      "type": "enumeration",
+      "enum": [
+        "brouillon",
+        "en_cours",
+        "complété",
+        "validé"
+      ]
+    },
+    "apprenti_nom": {
+      "type": "string"
+    },
+    "apprenti_prenom": {
+      "type": "string"
+    },
+    "apprenti_adresse": {
+      "type": "string"
+    },
+    "apprenti_telephone": {
+      "type": "string"
+    },
+    "apprenti_email": {
+      "type": "email"
+    },
+    "entreprise_nom": {
+      "type": "string"
+    },
+    "entreprise_adresse": {
+      "type": "string"
+    },
+    "tuteur_nom": {
+      "type": "string"
+    },
+    "tuteur_prenom": {
+      "type": "string"
+    },
+    "tuteur_fonction": {
+      "type": "string"
+    },
+    "tuteur_telephone": {
+      "type": "string"
+    },
+    "tuteur_email": {
+      "type": "email"
+    },
+    "formateur_nom": {
+      "type": "string"
+    },
+    "formateur_prenom": {
+      "type": "string"
+    },
+    "formateur_email": {
+      "type": "email"
+    },
+    "SuiviCompetence": {
+      "type": "component",
+      "component": "suivi.suivis-competences",
+      "repeatable": true
+    },
+    "Entretien": {
+      "type": "component",
+      "component": "suivi.entretiens",
+      "repeatable": true
+    },
+    "NoteLiaison": {
+      "type": "component",
+      "component": "suivi.notes-liaison",
+      "repeatable": true
+    },
+    "evalutation_tuteur": {
+      "type": "blocks"
+    },
+    "evalutation_formateur": {
+      "type": "blocks"
+    },
+    "auto_evaluation": {
+      "type": "blocks"
+    },
+    "synthese_finale": {
+      "type": "blocks"
+    },
+    "competences_validees": {
+      "type": "boolean"
+    },
+    "date_creation": {
+      "type": "datetime"
+    },
+    "date_validation": {
+      "type": "datetime"
+    }
+  }
+}

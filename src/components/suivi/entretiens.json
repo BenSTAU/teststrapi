@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_suivi_entretiens",
+  "info": {
+    "displayName": "entretiens"
+  },
+  "options": {},
+  "attributes": {
+    "numero": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "missions_realisees": {
+      "type": "blocks"
+    },
+    "points_positifs": {
+      "type": "blocks"
+    },
+    "difficultes": {
+      "type": "blocks"
+    },
+    "objectifs_suivants": {
+      "type": "blocks"
+    },
+    "signature_apprenti": {
+      "type": "boolean"
+    },
+    "signature_tuteur": {
+      "type": "boolean"
+    },
+    "signature_formateur": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_equipe_equipe_pedagogiques",
+  "info": {
+    "displayName": "equipe_pedagogique"
+  },
+  "options": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "prenom": {
+      "type": "string",
+      "required": true
+    },
+    "fonction": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "telephone": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

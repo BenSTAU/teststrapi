@@ -496,32 +496,77 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiFieldField extends Struct.CollectionTypeSchema {
-  collectionName: 'fields';
+export interface ApiBlocCompetenceBlocCompetence
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'bloc_competences';
   info: {
-    displayName: 'Field';
-    pluralName: 'fields';
-    singularName: 'field';
+    displayName: 'BlocCompetence';
+    pluralName: 'bloc-competences';
+    singularName: 'bloc-competence';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    competences: Schema.Attribute.Text & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    fieldKey: Schema.Attribute.UID;
-    label: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::field.field'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bloc-competence.bloc-competence'
+    > &
       Schema.Attribute.Private;
-    order: Schema.Attribute.Integer;
+    numero: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
-    required: Schema.Attribute.Boolean;
-    section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
-    type: Schema.Attribute.Enumeration<
-      ['text', 'input', 'boolean', 'checklist', 'button', 'label']
+    titre: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFormationFormation extends Struct.CollectionTypeSchema {
+  collectionName: 'formations';
+  info: {
+    displayName: 'Formation';
+    pluralName: 'formations';
+    singularName: 'formation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    active: Schema.Attribute.Boolean;
+    annee: Schema.Attribute.String;
+    bloc_competences: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bloc-competence.bloc-competence'
     >;
+    code: Schema.Attribute.UID<'nom'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    equipe_pedagogique: Schema.Attribute.Component<
+      'equipe.equipe-pedagogique',
+      true
+    >;
+    intitule_complet: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::formation.formation'
+    > &
+      Schema.Attribute.Private;
+    niveau: Schema.Attribute.String;
+    nom: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    objectifs_pedagogiques: Schema.Attribute.Blocks;
+    publishedAt: Schema.Attribute.DateTime;
+    rncp: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -560,85 +605,63 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiLivretTemplateLivretTemplate
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'livret_templates';
+export interface ApiLivretLivret extends Struct.CollectionTypeSchema {
+  collectionName: 'livrets';
   info: {
-    displayName: 'LivretTemplate';
-    pluralName: 'livret-templates';
-    singularName: 'livret-template';
+    displayName: 'Livret';
+    pluralName: 'livrets';
+    singularName: 'livret';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    apprenti_adresse: Schema.Attribute.String;
+    apprenti_email: Schema.Attribute.Email;
+    apprenti_nom: Schema.Attribute.String;
+    apprenti_prenom: Schema.Attribute.String;
+    apprenti_telephone: Schema.Attribute.String;
+    auto_evaluation: Schema.Attribute.Blocks;
+    competences_validees: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    isActive: Schema.Attribute.Boolean;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::livret-template.livret-template'
-    > &
-      Schema.Attribute.Private;
-    promotion: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    sections: Schema.Attribute.Relation<'oneToMany', 'api::section.section'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    year: Schema.Attribute.String;
-  };
-}
-
-export interface ApiSectionSection extends Struct.CollectionTypeSchema {
-  collectionName: 'sections';
-  info: {
-    displayName: 'Section';
-    pluralName: 'sections';
-    singularName: 'section';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    category: Schema.Attribute.Enumeration<
-      [
-        'cover',
-        'identite',
-        'formation',
-        'entreprise',
-        'cfa',
-        'objectifs',
-        'referentiel',
-        'suivi-competences',
-        'suivi-periodique',
-        'bilan-final',
-        'cahier-liaison',
-        'liens',
-      ]
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    fields: Schema.Attribute.Relation<'oneToMany', 'api::field.field'>;
-    livret_template: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::livret-template.livret-template'
+    date_creation: Schema.Attribute.DateTime;
+    date_validation: Schema.Attribute.DateTime;
+    entreprise_adresse: Schema.Attribute.String;
+    entreprise_nom: Schema.Attribute.String;
+    Entretien: Schema.Attribute.Component<'suivi.entretiens', true>;
+    evalutation_formateur: Schema.Attribute.Blocks;
+    evalutation_tuteur: Schema.Attribute.Blocks;
+    formateur_email: Schema.Attribute.Email;
+    formateur_nom: Schema.Attribute.String;
+    formateur_prenom: Schema.Attribute.String;
+    formation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::formation.formation'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::section.section'
+      'api::livret.livret'
     > &
       Schema.Attribute.Private;
-    order: Schema.Attribute.Integer;
+    NoteLiaison: Schema.Attribute.Component<'suivi.notes-liaison', true>;
     publishedAt: Schema.Attribute.DateTime;
-    showInPdf: Schema.Attribute.Boolean;
-    slug: Schema.Attribute.UID;
-    title: Schema.Attribute.String;
+    slug: Schema.Attribute.UID & Schema.Attribute.Required;
+    statut: Schema.Attribute.Enumeration<
+      ['brouillon', 'en_cours', 'compl\u00E9t\u00E9', 'valid\u00E9']
+    >;
+    SuiviCompetence: Schema.Attribute.Component<
+      'suivi.suivis-competences',
+      true
+    >;
+    synthese_finale: Schema.Attribute.Blocks;
+    tuteur_email: Schema.Attribute.Email;
+    tuteur_fonction: Schema.Attribute.String;
+    tuteur_nom: Schema.Attribute.String;
+    tuteur_prenom: Schema.Attribute.String;
+    tuteur_telephone: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1157,10 +1180,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
-      'api::field.field': ApiFieldField;
+      'api::bloc-competence.bloc-competence': ApiBlocCompetenceBlocCompetence;
+      'api::formation.formation': ApiFormationFormation;
       'api::global.global': ApiGlobalGlobal;
-      'api::livret-template.livret-template': ApiLivretTemplateLivretTemplate;
-      'api::section.section': ApiSectionSection;
+      'api::livret.livret': ApiLivretLivret;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
